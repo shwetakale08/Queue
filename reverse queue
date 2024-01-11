@@ -1,0 +1,93 @@
+#include<stdio.h>
+#define MAX 10
+struct queue
+{
+	int a[MAX];
+	int f,r;
+}q;
+void init()
+{
+	q.f=-1;
+	q.r=-1;
+}
+int isfull()
+{
+	if(q.r==MAX-1)
+	return 1;
+	else
+	return 0;
+}
+int isempty()
+{
+	if(q.f==-1 || q.f>q.r)
+	return 1;
+	else
+	return 0;
+}
+void enqueue(int num)
+{
+	if(isfull())
+	{
+		printf("queue is overflow:");
+	}
+	else
+	{
+		if(q.f==-1)
+		q.f=0;
+		q.r++;
+		q.a[q.r]=num;
+	}
+}
+void dequeue()
+{
+	int val;
+	if(isempty())
+	{
+		printf("queue is underflow:");
+	}
+	else
+	{
+		val=q.a[q.f];
+		q.f++;
+	}
+}
+void rev()
+{
+	int i;
+	for(i=q.r;i>=0;i--)
+	{
+		printf("%d\t",q.a[i]);
+	}
+}
+void disp()
+{
+	int i;
+	for(i=q.f;i<=q.r;i++)
+	{
+		printf("%d\t",q.a[i]);
+	}
+}
+int main()
+{
+	int i,n,num,ch;
+	init();
+	do
+	{
+	printf("\n1-enQ \n2-deQ \n3-revQ \n4-disp");
+	printf("enter your choice:");
+	scanf("%d",&ch);
+	switch(ch)
+	{
+		case 1:printf("enter number:");
+		       scanf("%d",&num);
+		       enqueue(num);
+		    break;
+		case 2:dequeue();
+		       break;
+		case 3:rev();
+		       break;	
+		case 4:disp();
+		       break;	             
+	}
+	}while(ch<5);
+}
